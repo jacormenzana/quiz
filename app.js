@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var partials = require('express-partials');
 
 //APP.JS: Segundo-> Importa enrutadores
 var routes = require('./routes/index');
@@ -20,6 +21,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+app.use(partials());
 
 
 //APP.JS: Quinto-> Instala MWs con app.use().
