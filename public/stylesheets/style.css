@@ -5,6 +5,7 @@
 
 body {
 	font: 16px "Georgia", serif;
+
 }
 
 
@@ -19,6 +20,8 @@ body {
 	margin-bottom: :1px;
 	color: black;	
 }
+
+
 
 section > div {
 	padding: 20px	
@@ -40,6 +43,25 @@ footer span {
 
 nav span {
 	margin: 0px 10px 0px 0px;	
+}
+
+
+#fotografiaPerfil img { 
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+background-color: #fff;
+border: 1px solid #ccc;
+padding: 1px; 
+width: 90px;
+height: 110px;
+}
+
+#info {
+	padding: 0px		
 }
 
 
