@@ -21,7 +21,9 @@ body {
 	color: black;	
 }
 
-
+#t1, #f1 , #p1 {
+	text-align: left;	
+}
 
 section > div {
 	padding: 20px	

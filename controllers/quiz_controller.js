@@ -19,9 +19,27 @@ exports.load = function(req, res,next,quizId) {
 
 // GET /quizes
 exports.index = function(req, res) {
-	models.Quiz.findAll().then(function(quizes) {
-		res.render('quizes/index.ejs',{quizes: quizes});
-	})
+
+	//Parámetro de búsqueda search
+	var parametroSearchEnQueryDeGetHttp = req.query.search;
+
+	//Existe condicion de filtrado
+	var tipo = 'Completo';
+
+	if(parametroSearchEnQueryDeGetHttp === undefined) {
+		//Si no existe parámetro, significa que búsqueda se ha ejecutado sin condición de filtrado
+		// y busco todos
+		models.Quiz.findAll().then(function(quizes) {
+			res.render('quizes/index.ejs',{quizes: quizes, tipo: tipo});
+		})
+	} else {
+		//Si existe parámetro, significa que existe condición de filtrado y ejecuto búsqueda condicionada	
+		patronBusqueda = "%".concat(parametroSearchEnQueryDeGetHttp.replace(/ +/g,'%'),"%");
+		tipo = 'Filtrado';
+		models.Quiz.findAll({where: ["pregunta like ?", patronBusqueda]}).then(function(quizes) {
+			res.render('quizes/index.ejs',{quizes: quizes, tipo: tipo});
+		})
+	}
 };
 
 

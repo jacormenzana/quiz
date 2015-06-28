@@ -1,8 +1,28 @@
-    <table>
-    <% var i; for (i=0; i < quizes.length ; i++) { %>
-    	<tr><td><a href="quizes/<%= quizes[i].id %>"><%=quizes[i].pregunta %></a></td></tr>
-    <% } %>
-    </table>
 
+	<% var nPreguntas=quizes.length ; %>
+	<% if (nPreguntas > 0) {  %>
+
+		<h3 id=p1>Preguntas </h3><br>
+	    <table id=t1>
+	    <% var i; for (i=0; i < quizes.length ; i++) { %>
+	    	<tr><td><a href="quizes/<%= quizes[i].id %>"><%=quizes[i].pregunta %></a></td></tr>
+	    <% } %>
+	    </table>
+	    <br>	    
+		<% if (tipo === 'Completo') {  %>
+			<form method="get" action="/quizes" id=f1>
+				<h4>Condición de filtrado</h4><br>
+				<input type="text"   name="search" value="Introduce filtro"><br><br>
+				<input type="submit"  value="Filtrar">
+			</form>
+		<% }  %>
+
+	<% } else {  %>
+		<% if (tipo === 'Completo') {  %>
+			<p> No hay ninguna pregunta en la base de datos</p>
+		<% } else {  %>
+			<p> No hay ninguna pregunta que cumpla la condición de búsqueda</p>
+		<% }  %>		
+	<% }  %>
 
 
