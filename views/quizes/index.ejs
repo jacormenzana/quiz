@@ -8,10 +8,15 @@
 	    	<tr><td><a href="quizes/<%= quizes[i].id %>"><%=quizes[i].pregunta %></a></td></tr>
 	    <% } %>
 	    </table>
+	    <br>	   
+	    <br>
+	    <a href="/quizes/new"><button type="button" style="float:left">Crear pregunta</button></a>
 	    <br>	    
 		<% if (tipo === 'Completo') {  %>
 			<form method="get" action="/quizes" id=f1>
-				<h4>Condición de filtrado</h4><br>
+				<br>
+				<br>
+				<h4>Condición de filtrado</h4>
 				<input type="text"   name="search" value="Introduce filtro"><br><br>
 				<input type="submit"  value="Filtrar">
 			</form>
