@@ -6,7 +6,15 @@
 	    <table id=t1>
 	    <% var i; for (i=0; i < quizes.length ; i++) { %>
 	    	<tr><td><a href="quizes/<%= quizes[i].id %>"><%=quizes[i].pregunta %></a></td>
-	    		<td><a href="quizes/<%= quizes[i].id %>/edit"<button type="button"  class="btn">Editar</button></a></td></tr>	    	
+	    		<td><a href="quizes/<%= quizes[i].id %>/edit"<button type="button"  class="btn">Editar</button></a></td>
+	    		<td>
+	    			<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+	    				<button type="summit" class="btn" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
+	    					borrar
+	    				</button>
+	    			</form>
+	    		</td>
+	    	</tr>	    	
 	    <% } %>
 	    </table>
 	    <br>	   
