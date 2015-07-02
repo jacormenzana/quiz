@@ -25,13 +25,14 @@ body {
 	text-align: left;	
 }
 
+
 section > div {
 	padding: 20px	
 }
 
 header, nav, section {
 	background: #eee;
-	text-align: center;
+/*	text-align: center;*/
 }
 
 footer {
@@ -47,6 +48,8 @@ nav span {
 	margin: 0px 10px 0px 0px;	
 }
 
+
+#ErrorMsgs	{background: #fff; font-size: smaller; margin-left: 20px;}
 
 #fotografiaPerfil img { 
 -webkit-border-radius: 3px;

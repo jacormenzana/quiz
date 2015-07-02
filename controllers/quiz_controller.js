@@ -30,14 +30,14 @@ exports.index = function(req, res) {
 		//Si no existe parámetro, significa que búsqueda se ha ejecutado sin condición de filtrado
 		// y busco todos
 		models.Quiz.findAll().then(function(quizes) {
-			res.render('quizes/index.ejs',{quizes: quizes, tipo: tipo});
+			res.render('quizes/index.ejs',{quizes: quizes, tipo: tipo, errors: []});
 		})
 	} else {
 		//Si existe parámetro, significa que existe condición de filtrado y ejecuto búsqueda condicionada	
 		patronBusqueda = "%".concat(parametroSearchEnQueryDeGetHttp.replace(/ +/g,'%'),"%");
 		tipo = 'Filtrado';
 		models.Quiz.findAll({where: ["pregunta like ?", patronBusqueda]}).then(function(quizes) {
-			res.render('quizes/index.ejs',{quizes: quizes, tipo: tipo});
+			res.render('quizes/index.ejs',{quizes: quizes, tipo: tipo, errors: []});
 		})
 	}
 };
@@ -45,7 +45,7 @@ exports.index = function(req, res) {
 
 // GET /quizes/:Id
 exports.show = function(req, res) {
-		res.render('quizes/show',{ quiz: req.quiz});
+		res.render('quizes/show',{ quiz: req.quiz, errors: []});
 };
 
 // GET /quizes/:quizId/answer
@@ -54,7 +54,7 @@ exports.answer = function(req, res) {
 	if ( req.query.respuesta === req.quiz.respuesta) {
 		resultado = 'Correcto';
 	} 	
-	res.render('quizes/answer',	{quiz: req.quiz, respuesta: resultado});
+	res.render('quizes/answer',	{quiz: req.quiz, respuesta: resultado, errors: []});
 };
 
 // GET /author
@@ -66,17 +66,25 @@ exports.author = function(req, res) {
 // GET /new
 exports.new = function(req, res) {
 	var quiz = models.Quiz.build({pregunta:"Pregunta", respuesta: "Respuesta"});
-	res.render('quizes/new',	{quiz: quiz});
+	res.render('quizes/new',	{quiz: quiz, errors: []});
 };
 
 
-// POST /createt
+// POST /create
 exports.create = function(req, res) {
 
 	var quiz = models.Quiz.build(req.body.quiz);
-	// guarda en DB los campos pregunta y respuesta de quiz
+	
+	quiz.validate().then(function(err){
+				if(err) {
+					res.render('quizes/new',{quiz:quiz, errors:err.errors});
+				} else {
 
-	quiz.save({fields: ["pregunta","respuesta"]}).then(function(){
-		res.redirect('/quizes');		
-	});
+					// guarda en DB los campos pregunta y respuesta de quiz
+					quiz.save({fields: ["pregunta","respuesta"]}).then(function(){
+						res.redirect('/quizes');		
+					});
+				}
+			}
+		);
 };
