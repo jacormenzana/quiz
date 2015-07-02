@@ -32,7 +32,7 @@ section > div {
 
 header, nav, section {
 	background: #eee;
-/*	text-align: center;*/
+	text-align: center;
 }
 
 footer {
@@ -49,7 +49,7 @@ nav span {
 }
 
 
-#ErrorMsgs	{background: #fff; font-size: smaller; margin-left: 20px;}
+#ErrorMsgs	{color: #f61; font-size: smaller; margin-left: 20px;}
 
 #fotografiaPerfil img { 
 -webkit-border-radius: 3px;
@@ -74,3 +74,30 @@ div .formNew{
 	text-align: left;	
 }
 
+
+.btn {
+  background: #b0b0b0;
+  background-image: -webkit-linear-gradient(top, #b0b0b0, #b0b0b0);
+  background-image: -moz-linear-gradient(top, #b0b0b0, #b0b0b0);
+  background-image: -ms-linear-gradient(top, #b0b0b0, #b0b0b0);
+  background-image: -o-linear-gradient(top, #b0b0b0, #b0b0b0);
+  background-image: linear-gradient(to bottom, #b0b0b0, #b0b0b0);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 1px 2px 1px 2px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #5c5c5c;
+  background-image: -webkit-linear-gradient(top, #5c5c5c, #5c5c5c);
+  background-image: -moz-linear-gradient(top, #5c5c5c, #5c5c5c);
+  background-image: -ms-linear-gradient(top, #5c5c5c, #5c5c5c);
+  background-image: -o-linear-gradient(top, #5c5c5c, #5c5c5c);
+  background-image: linear-gradient(to bottom, #5c5c5c, #5c5c5c);
+  text-decoration: none;
+}
