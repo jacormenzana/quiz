@@ -70,8 +70,8 @@ height: 110px;
 }
 
 
-div .formNew{
-	text-align: left;	
+.formNew, .formShowQuiz, .formAddComment, .formShowComment  {
+  text-align: left; 
 }
 
 
