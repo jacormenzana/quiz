@@ -36,7 +36,7 @@ exports.index = function(req, res) {
 		//Si existe parámetro, significa que existe condición de filtrado y ejecuto búsqueda condicionada	
 		patronBusqueda = "%".concat(parametroSearchEnQueryDeGetHttp.replace(/ +/g,'%'),"%");
 		tipo = 'Filtrado';
-		models.Quiz.findAll({where: ["pregunta like ?", patronBusqueda]}).then(function(quizes) {
+		models.Quiz.findAll({where: ["pregunta like ?", patronBusqueda], order: 'pregunta'}).then(function(quizes) {
 			res.render('quizes/index.ejs',{quizes: quizes, tipo: tipo, errors: []});
 		})
 	}
@@ -59,13 +59,13 @@ exports.answer = function(req, res) {
 
 // GET /author
 exports.author = function(req, res) {
-	res.render('author');
+	res.render('author', { errors: []});
 };
 
 
 // GET /new
 exports.new = function(req, res) {
-	var quiz = models.Quiz.build({pregunta:"Pregunta", respuesta: "Respuesta"});
+	var quiz = models.Quiz.build({pregunta:"Pregunta", respuesta: "Respuesta", tema: "Tema"});
 	res.render('quizes/new',	{quiz: quiz, errors: []});
 };
 
@@ -81,7 +81,7 @@ exports.create = function(req, res) {
 				} else {
 
 					// guarda en DB los campos pregunta y respuesta de quiz
-					quiz.save({fields: ["pregunta","respuesta"]}).then(function(){
+					quiz.save({fields: ["pregunta","respuesta","tema"]}).then(function(){
 						res.redirect('/quizes');		
 					});
 				}
@@ -103,6 +103,7 @@ exports.update = function(req, res) {
 
 	req.quiz.pregunta = req.body.quiz.pregunta;
 	req.quiz.respuesta = req.body.quiz.respuesta;
+	req.quiz.tema = req.body.quiz.tema;
 
 	req.quiz.validate().then(function(err){
 				if(err) {
@@ -110,7 +111,7 @@ exports.update = function(req, res) {
 				} else {
 
 					// guarda en DB los campos pregunta y respuesta de quiz
-					req.quiz.save({fields: ["pregunta","respuesta"]}).then(function(){
+					req.quiz.save({fields: ["pregunta","respuesta", "tema"]}).then(function(){
 						res.redirect('/quizes');		
 					});
 				}
@@ -120,7 +121,7 @@ exports.update = function(req, res) {
 
 
 
-// PUT /quizes/:id
+// DELETE /quizes/:id
 exports.destroy = function(req, res) {
 
 					req.quiz.destroy().then(function(){

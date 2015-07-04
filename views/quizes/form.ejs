@@ -1,7 +1,17 @@
-<label for="preg" class="rem">Pregunta:</label>
+<label for="preg" class="rem">Pregunta: </label>
 <input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta%>"/><p>
 <label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta%>"/><p>
+<label for="tema" class="rem">Tema:     </label>
+<select name="quiz[tema]" id="FormTema">
+	<%var index;%> 
+	<%var options = ["Otro", "Humanidades","Ocio","Ciencia","Tecnología"];%> 
+	<%for (index=0;index<options.length; index++){%> 
+	<option value= <%=options[index]%> 
+	<%if (options[index]===quiz.tema){%> selected <%}%>><%=options[index]%></option>
+	<%}%>
+</select>
+<br>
 <br>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar"/>
