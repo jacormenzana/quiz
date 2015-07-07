@@ -6,20 +6,24 @@
 	    <table id=t1>
 	    <% var i; for (i=0; i < quizes.length ; i++) { %>
 	    	<tr><td><a href="quizes/<%= quizes[i].id %>"><%=quizes[i].pregunta %></a></td>
-	    		<td><a href="quizes/<%= quizes[i].id %>/edit"<button type="button"  class="btn">Editar</button></a></td>
-	    		<td>
-	    			<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
-	    				<button type="summit" class="btn" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
-	    					borrar
-	    				</button>
-	    			</form>
-	    		</td>
+	    		<%if(session.user){%>
+		    		<td><a href="quizes/<%= quizes[i].id %>/edit"<button type="button"  class="btn">Editar</button></a></td>
+		    		<td>
+		    			<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+		    				<button type="summit" class="btn" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
+		    					borrar
+		    				</button>
+		    			</form>
+		    		</td>
+	    		<% } %>
 	    	</tr>	    	
 	    <% } %>
 	    </table>
 	    <br>	   
 	    <br>
-	    <a href="/quizes/new"><button type="button" style="float:left">Crear pregunta</button></a>
+	    <%if(session.user){%>
+	    	<a href="/quizes/new"><button type="button" style="float:left">Crear pregunta</button></a>
+	    <% } %>
 	    <br>	    
 		<% if (tipo === 'Completo') {  %>
 			<form method="get" action="/quizes" id=f1>
