@@ -101,3 +101,7 @@ height: 110px;
   background-image: linear-gradient(to bottom, #5c5c5c, #5c5c5c);
   text-decoration: none;
 }
+
+.right {
+    float:right;
+}

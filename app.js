@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
+var session = require('express-session');
 
 //APP.JS: Segundo-> Importa enrutadores
 var routes = require('./routes/index');
@@ -38,14 +39,45 @@ app.use(favicon(__dirname + '/public/images/ball.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(cookieParser('Quiz_2015'));
+app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+//APP.JS: Sexto-> Se define un MW que realiza dos funciones
+//                  Guarda la ruta de cada solicitud HTTP en la variable session.redir 
+//                  para que esté accesible en las vistas
+//
+//                  Copia la sesión que stá accesible en req.session en res.locals.session 
+//                  para  que esté accesible en las vistas
+
+
+
+//Helpers dinámicos
+app.use(function(req, res, next) {
+
+  // guardar parth en session.redir para despues de .login
+  if (!req.path.match(/\/login|\/logout/)) {
+      req.session.redir = req.path;
+  }
+
+  // Hacer visible req.session en las vistas
+    res.locals.session = req.session;
+    next();
+});
+
+
+
 
 
 //APP.JS: Sexto-> Instala enrutadores
 //                Asocia rutas con sus gestores
 app.use('/', routes);
+
+
+
 
 
 
